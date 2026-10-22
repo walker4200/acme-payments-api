@@ -1,0 +1,20 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  pull_request_target:          # dangerous trigger combined with checkout of PR head below
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2               # outdated, unpinned action
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm install
+      - name: Greet PR author
+        run: echo "Thanks ${{ github.event.pull_request.title }}"   # script injection via PR title
+      - run: npm test --if-present

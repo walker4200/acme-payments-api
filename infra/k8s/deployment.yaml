@@ -1,0 +1,28 @@
+# Kubernetes manifest - INTENTIONALLY MISCONFIGURED for IaC scanning
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acme-payments-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: acme-payments-api }
+  template:
+    metadata:
+      labels: { app: acme-payments-api }
+    spec:
+      hostNetwork: true
+      hostPID: true
+      containers:
+        - name: api
+          image: docker.io/YOUR_DOCKERHUB_USER/acme-payments-api:latest
+          securityContext:
+            privileged: true
+            runAsUser: 0
+            allowPrivilegeEscalation: true
+            readOnlyRootFilesystem: false
+          env:
+            - name: JWT_SECRET
+              value: "acme-super-secret-jwt-key-2024"
+          ports:
+            - containerPort: 3000

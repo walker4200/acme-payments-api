@@ -1,0 +1,16 @@
+{
+  "openapi": "3.0.0",
+  "info": { "title": "Acme Payments API", "version": "1.3.0" },
+  "paths": {
+    "/api/users": { "get": { "parameters": [{ "name": "id", "in": "query", "required": true, "schema": { "type": "string", "example": "1" } }], "responses": { "200": { "description": "users" } } } },
+    "/api/login": { "post": { "requestBody": { "content": { "application/json": { "schema": { "type": "object", "properties": { "username": { "type": "string", "example": "alice" }, "password": { "type": "string", "example": "password1" } } } } } }, "responses": { "200": { "description": "token" } } } },
+    "/api/orders": { "get": { "parameters": [{ "name": "Authorization", "in": "header", "schema": { "type": "string" } }], "responses": { "200": { "description": "orders" } } } },
+    "/search": { "get": { "parameters": [{ "name": "q", "in": "query", "schema": { "type": "string", "example": "widget" } }], "responses": { "200": { "description": "html" } } } },
+    "/api/files": { "get": { "parameters": [{ "name": "name", "in": "query", "schema": { "type": "string", "example": "readme.txt" } }], "responses": { "200": { "description": "file" } } } },
+    "/api/webhooks/test": { "post": { "requestBody": { "content": { "application/json": { "schema": { "type": "object", "properties": { "url": { "type": "string", "example": "https://example.com" } } } } } }, "responses": { "200": { "description": "proxied" } } } },
+    "/api/preferences": { "post": { "requestBody": { "content": { "application/json": { "schema": { "type": "object", "properties": { "theme": { "type": "string", "example": "dark" } } } } } }, "responses": { "200": { "description": "prefs" } } } },
+    "/api/tokens/reset": { "post": { "requestBody": { "content": { "application/json": { "schema": { "type": "object", "properties": { "email": { "type": "string", "example": "alice@acme.test" } } } } } }, "responses": { "200": { "description": "token" } } } },
+    "/redirect": { "get": { "parameters": [{ "name": "next", "in": "query", "schema": { "type": "string", "example": "/" } }], "responses": { "302": { "description": "redirect" } } } },
+    "/health": { "get": { "responses": { "200": { "description": "health" } } } }
+  }
+}
