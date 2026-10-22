@@ -25,15 +25,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.send(`<h1>Acme Payments API</h1>
-    <ul>
-      <li><a href="/api/users?id=1">/api/users?id=1</a></li>
-      <li><a href="/search?q=widget">/search?q=widget</a></li>
-      <li><a href="/api/files?name=readme.txt">/api/files?name=readme.txt</a></li>
-      <li><a href="/openapi.json">/openapi.json</a></li>
-    </ul>`);
-});
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "..", "public", "index.html")));
 
 app.get("/health", (req, res) => res.json({ status: "ok", version: "1.3.0", env: process.env }));  // info leak
 

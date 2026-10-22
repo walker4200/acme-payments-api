@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acme Payments Portal</title>
+  <style>
+    :root { --bg:#f5f7fb; --card:#fff; --ink:#1d2433; --muted:#5b6475; --brand:#3b5bdb; --line:#e3e7ef; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:var(--bg); color:var(--ink); }
+    header { background:var(--ink); color:#fff; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+    header h1 { margin:0; font-size:20px; }
+    header nav a { color:#cfd6e6; margin-left:16px; text-decoration:none; font-size:14px; }
+    .banner { background:#fff4e5; color:#7a4b00; padding:10px 24px; font-size:13px; border-bottom:1px solid #f3d9b1; }
+    main { max-width:1100px; margin:24px auto; padding:0 16px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; }
+    section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px; }
+    h2 { margin:0 0 4px; font-size:16px; }
+    p.hint { margin:0 0 12px; color:var(--muted); font-size:13px; }
+    label { display:block; font-size:13px; margin:8px 0 4px; color:var(--muted); }
+    input, select, textarea { width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:6px; font:inherit; }
+    button { margin-top:12px; background:var(--brand); color:#fff; border:0; border-radius:6px; padding:9px 14px; font:inherit; cursor:pointer; }
+    footer { text-align:center; color:var(--muted); font-size:12px; padding:24px; }
+    footer a { color:var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Acme Payments Portal</h1>
+    <nav>
+      <a href="/api/users?id=1">My account</a>
+      <a href="/api/files?name=readme.txt">Docs</a>
+      <a href="/openapi.json">API spec</a>
+      <a href="/redirect?next=/">Home</a>
+    </nav>
+  </header>
+  <div class="banner">Demo environment &mdash; intentionally vulnerable application for security testing. No real data.</div>
+
+  <main>
+    <section>
+      <h2>Sign in</h2>
+      <p class="hint">Customer &amp; staff login.</p>
+      <form action="/api/login" method="post">
+        <label for="username">Username</label>
+        <input id="username" name="username" value="alice" autocomplete="username">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" value="password1" autocomplete="current-password">
+        <button type="submit">Sign in</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Product search</h2>
+      <p class="hint">Search the Acme catalogue.</p>
+      <form action="/search" method="get">
+        <label for="q">Search term</label>
+        <input id="q" name="q" value="widget">
+        <button type="submit">Search</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Customer lookup</h2>
+      <p class="hint">Support staff: look up a customer by ID.</p>
+      <form action="/api/users" method="get">
+        <label for="id">Customer ID</label>
+        <input id="id" name="id" value="2">
+        <button type="submit">Look up</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Download a document</h2>
+      <p class="hint">Invoices, statements and public docs.</p>
+      <form action="/api/files" method="get">
+        <label for="name">Document</label>
+        <select id="name" name="name">
+          <option value="readme.txt">readme.txt</option>
+          <option value="terms.txt">terms.txt</option>
+        </select>
+        <button type="submit">Download</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Test a webhook</h2>
+      <p class="hint">We'll call your endpoint and show the response.</p>
+      <form action="/api/webhooks/test" method="post">
+        <label for="url">Webhook URL</label>
+        <input id="url" name="url" value="https://example.com">
+        <button type="submit">Send test event</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Preferences</h2>
+      <p class="hint">Display settings for your account.</p>
+      <form action="/api/preferences" method="post">
+        <label for="theme">Theme</label>
+        <select id="theme" name="theme"><option>light</option><option>dark</option></select>
+        <label for="currency">Currency</label>
+        <input id="currency" name="currency" value="USD">
+        <button type="submit">Save</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Forgot password</h2>
+      <p class="hint">We'll generate a reset token.</p>
+      <form action="/api/tokens/reset" method="post">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" value="alice@acme.test">
+        <button type="submit">Send reset link</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Receipt preview</h2>
+      <p class="hint">Preview a custom receipt template (staff only).</p>
+      <form action="/api/receipts/preview" method="post">
+        <label for="template">Template</label>
+        <textarea id="template" name="template" rows="3">Thanks <%= customer %>, you paid $<%= amount %>.</textarea>
+        <button type="submit">Preview</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    Acme Corp &middot; <a href="/health">Status</a> &middot; <a href="/redirect?next=https://example.com">Partner site</a>
+  </footer>
+</body>
+</html>
