@@ -118,6 +118,8 @@ app.post("/api/tokens/reset", (req, res) => {
 // --- SAST: open redirect ---------------------------------------------
 app.get("/redirect", (req, res) => res.redirect(req.query.next));
 
+require("./export")(app);
+
 app.get("/openapi.json", (req, res) => res.sendFile(path.join(__dirname, "..", "openapi.json")));
 
 app.listen(config.port, () => console.log(`Acme Payments API listening on :${config.port}`));
