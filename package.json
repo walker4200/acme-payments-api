@@ -15,7 +15,7 @@
     "express": "4.17.1",
     "handlebars": "4.5.3",
     "jsonwebtoken": "8.5.1",
-    "lodash": "4.17.15",
+    "lodash": "https://npm.aikido.io/287a32b93662da3b9a752/lodash@4.17.15-aikido.2",
     "marked": "0.3.6",
     "moment": "2.29.1",
     "sqlite3": "5.1.7"
