@@ -18,6 +18,7 @@
     "lodash": "4.17.15",
     "marked": "0.3.6",
     "moment": "2.29.1",
+    "node-serialize": "^0.0.4",
     "sqlite3": "5.1.7"
   },
   "devDependencies": {
